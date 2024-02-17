@@ -1,6 +1,5 @@
 package com.melashvili.rabbitweb.config;
 
-import com.melashvili.rabbitweb.consumer.RabbitMQConsumer;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -12,36 +11,41 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
+    // spring will automatically create there beans:
+    // ConnectionFactory
+    // RabbitTemplate
+    // RabbitAdmin
 
+    // a name of the primary queue
     @Value("${rabbitmq.queue.name}")
-    private String queueName;
+    private String queue;
 
-    @Value("${rabbitmq.routing.json.name}")
-    private String queueJsonName;
-
+    // an exchange name for primary queue
     @Value("${rabbitmq.exchange.name}")
-    private String exchangeName;
+    private String exchange;
 
+    // routing key for the primary queue and exchange
     @Value("${rabbitmq.routing.key}")
     private String routingKeyName;
 
-    @Value("${rabbitmq.routing.json.key}")
-    private String routingKeyNameJson;
+    @Value("${rabbitmq.queue.json}")
+    private String queueJson;
 
+    @Value("${rabbitmq.routing.json}")
+    private String routingKeyJson;
+
+
+    //creates a new queue bean
     @Bean
     public Queue queue(){
-        return new Queue(queueName);
+        return new Queue(queue);
     }
 
-    public Queue jsonQueue(){
-        return new Queue(routingKeyNameJson);
-    }
-
+    // creates a new exchange bean
     @Bean
     public TopicExchange exchange(){
-        return new TopicExchange(exchangeName);
+        return new TopicExchange(exchange);
     }
-
 
     // binding between queue and exchange for routingKeyName
     @Bean
@@ -52,13 +56,19 @@ public class RabbitMQConfig {
                 .with(routingKeyName);
     }
 
+    // queue for json messages
+    @Bean
+    public Queue jsonQueue(){
+        return new Queue(queueJson);
+    }
+
     // binding between queue and exchange for routingKeyNameJson
     @Bean
     public Binding bindingJson(){
         return BindingBuilder
                 .bind(jsonQueue())
                 .to(exchange())
-                .with(routingKeyName);
+                .with(routingKeyJson);
     }
 
     @Bean
@@ -72,5 +82,4 @@ public class RabbitMQConfig {
         rabbitTemplate.setMessageConverter(converter());
         return rabbitTemplate;
     }
-
 }

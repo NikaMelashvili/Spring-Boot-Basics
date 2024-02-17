@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RabbitMQProducer {
-
+    // this class is a producer that sends the message to the broker
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
 
@@ -20,13 +20,13 @@ public class RabbitMQProducer {
 
     private RabbitTemplate rabbitTemplate;
 
-    @Autowired
     public RabbitMQProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
     public void sendMessage(String message){
         LOGGER.info(String.format("Message sent -> %s", message));
+        System.out.println(message);
         rabbitTemplate.convertAndSend(exchange, routingKey, message);
     }
 }

@@ -17,10 +17,11 @@ public class MessageController {
         this.producer = producer;
     }
 
-    @GetMapping("/publisher")
+    // http://localhost:8080/api/publish?message=hello
+    @GetMapping("/publish")
     public ResponseEntity<String> sendMessage(@RequestParam("message") String message){
         producer.sendMessage(message);
-        return ResponseEntity.ok("message sent to rabbitmq");
+        return ResponseEntity.ok("message sent to RabbitMQ");
     }
 }
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class RabbitMQJsonConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQJsonConsumer.class);
 
-    @RabbitListener(queues = {"${rabbitmq.routing.json.name}"})
+    @RabbitListener(queues = {"${rabbitmq.routing.json}"})
     public void consumeJsonMessage(User user){
         LOGGER.info(String.format("Received Json message -> %s", user.toString()));
     }

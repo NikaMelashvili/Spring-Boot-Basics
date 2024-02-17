@@ -14,7 +14,7 @@ public class RabbitMQJsonProducer {
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
 
-    @Value("${rabbitmq.routing.json.key}")
+    @Value("${rabbitmq.routing.json}")
     private String jsonRoutingKey;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQProducer.class);
