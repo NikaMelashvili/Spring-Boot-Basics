@@ -5,8 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.3</version> <!-- Update to the latest version -->
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.6.3</version>
+		<relativePath/>
 	</parent>
 	<groupId>com.melashvili</groupId>
 	<artifactId>elastic-search</artifactId>
@@ -14,8 +14,7 @@
 	<name>elastic-search</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<!-- elasticsearch works better with java 17 -->
-		<java.version>17</java.version> <!-- Update to a supported Java version -->
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

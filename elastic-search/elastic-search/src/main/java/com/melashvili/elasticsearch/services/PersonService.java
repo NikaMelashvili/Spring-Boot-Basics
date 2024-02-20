@@ -7,17 +7,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PersonService {
-    private final PersonRepository personRepository;
+
+    private final PersonRepository repository;
 
     @Autowired
-    public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public PersonService(PersonRepository repository) {
+        this.repository = repository;
     }
 
-    public void save(Person person){
-        personRepository.save(person);
+    public void save(final Person person) {
+        repository.save(person);
     }
-    public Person findById(String id){
-        return personRepository.findById(id).orElse(null);
+
+    public Person findById(final String id) {
+        return repository.findById(id).orElse(null);
     }
 }

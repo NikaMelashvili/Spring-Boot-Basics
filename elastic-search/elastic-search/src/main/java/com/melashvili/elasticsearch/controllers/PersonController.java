@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/person")
 public class PersonController {
-    private PersonService service;
+    private final PersonService service;
 
     @Autowired
     public PersonController(PersonService service) {
@@ -16,12 +16,12 @@ public class PersonController {
     }
 
     @PostMapping
-    public void save(@RequestBody Person person){
+    public void save(@RequestBody final Person person) {
         service.save(person);
     }
 
     @GetMapping("/{id}")
-    public Person findById(@PathVariable String id){
+    public Person findById(@PathVariable final String id) {
         return service.findById(id);
     }
 }
