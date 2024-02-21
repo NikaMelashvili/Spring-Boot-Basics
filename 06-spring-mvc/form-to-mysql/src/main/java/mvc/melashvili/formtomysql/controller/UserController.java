@@ -21,7 +21,7 @@ public class UserController {
 
     @GetMapping("/addForm")
     public String showAddForm() {
-        return "submitform"; // Assuming submitform.html exists
+        return "submitform";
     }
 
     @PostMapping("/add")
@@ -34,14 +34,20 @@ public class UserController {
         } catch(Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-        addStudent(name, age);
+        Student student = addStudent(name, age);
+
+        model.addAttribute("Student", student.getId());
         return "submitform";
     }
 
-    private void addStudent(String name, int age) {
+    private Student addStudent(String name, int age) {
         Student student = new Student(name, age);
-        studentService.saveStudent(student);
         System.out.println("Student saved successfully");
+        return studentService.saveStudent(student);
+    }
+
+    private Student getStudentById(int id){
+        return studentService.findStudent(id);
     }
 }
 

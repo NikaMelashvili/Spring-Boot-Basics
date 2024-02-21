@@ -5,6 +5,8 @@ import mvc.melashvili.formtomysql.controller.repository.StudentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class StudentService {
 
@@ -15,7 +17,13 @@ public class StudentService {
         this.studentDAO = studentDAO;
     }
 
-    public void saveStudent(Student student){
-        studentDAO.save(student);
+    public Student saveStudent(Student student){
+        return studentDAO.save(student);
+    }
+
+    public Student findStudent(int id){
+        Optional<Student> studentOptional = studentDAO.findById(id);
+        Student student = studentOptional.get();
+        return student;
     }
 }
