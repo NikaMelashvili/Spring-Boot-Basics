@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL Form</title>
+</head>
+<body>
+<form th:action="@{/api/add}" method="POST">
+    <input type="text" id="first_name" name="first_name" placeholder="Enter Your First Name" required>
+    <input type="text" name="age" id="age" placeholder="Enter Your Age">
+    <input type="submit">
+</form>
+</body>
+</html>
