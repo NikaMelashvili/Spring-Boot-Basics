@@ -2,14 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Thymeleaf Project</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-
-Spring Project
-
-<br>
-
-Student name: <span th:text="${param.studentName}" />
-
+    <p th:text="'Time on the server is ' + ${theDate}" class="textColor" />
 </body>
 </html>
