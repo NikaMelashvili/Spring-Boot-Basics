@@ -27,7 +27,7 @@ public class OneToOneMappingApplication {
 	}
 
 	private void deleteDetailById(InstructorDAO instructorDAO) {
-		int id = 1;
+		int id = 3;
 		instructorDAO.deleteInstructorMethodById(id);
 	}
 
@@ -60,5 +60,4 @@ public class OneToOneMappingApplication {
 		instructorDAO.save(tempInstrucor);
 		System.out.println("Instructor saved.");
 	}
-
 }

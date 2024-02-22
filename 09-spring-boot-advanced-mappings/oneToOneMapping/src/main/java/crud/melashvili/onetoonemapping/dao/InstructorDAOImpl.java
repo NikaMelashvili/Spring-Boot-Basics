@@ -42,6 +42,7 @@ public class InstructorDAOImpl implements InstructorDAO{
     @Transactional
     public void deleteInstructorMethodById(int id) {
         InstructorDetail temp = manager.find(InstructorDetail.class, id);
+        temp.getInstructor().setInstructorDetail(null);
         manager.remove(temp);
     }
 }
