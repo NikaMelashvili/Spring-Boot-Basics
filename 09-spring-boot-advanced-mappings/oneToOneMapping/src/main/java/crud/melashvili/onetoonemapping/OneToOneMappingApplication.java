@@ -18,8 +18,15 @@ public class OneToOneMappingApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(InstructorDAO instructorDAO) {
 		return runner -> {
-			saveInstrucor(instructorDAO);
+//			saveInstrucor(instructorDAO);
+			getById(instructorDAO);
 		};
+	}
+
+	private void getById(InstructorDAO instructorDAO) {
+		int id = 1;
+		Instructor instructor = instructorDAO.findInstructorById(id);
+		System.out.println(instructor);
 	}
 
 	private void saveInstrucor(InstructorDAO instructorDAO) {
