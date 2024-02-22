@@ -24,4 +24,11 @@ public class InstructorDAOImpl implements InstructorDAO{
     public Instructor findInstructorById(int id) {
         return manager.find(Instructor.class, id);
     }
+
+    @Override
+    @Transactional
+    public void deleteInstructorById(int id) {
+        Instructor tempInstructor = manager.find(Instructor.class, id);
+        manager.remove(tempInstructor);
+    }
 }

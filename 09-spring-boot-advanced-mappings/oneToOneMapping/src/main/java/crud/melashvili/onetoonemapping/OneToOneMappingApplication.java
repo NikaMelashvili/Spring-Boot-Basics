@@ -19,8 +19,15 @@ public class OneToOneMappingApplication {
 	public CommandLineRunner commandLineRunner(InstructorDAO instructorDAO) {
 		return runner -> {
 //			saveInstrucor(instructorDAO);
-			getById(instructorDAO);
+//			getById(instructorDAO);
+			deleteById(instructorDAO);
 		};
+	}
+
+	private void deleteById(InstructorDAO instructorDAO) {
+		int id = 2;
+		instructorDAO.deleteInstructorById(id);
+		System.out.println("Deleted instructor by id " + id);
 	}
 
 	private void getById(InstructorDAO instructorDAO) {
