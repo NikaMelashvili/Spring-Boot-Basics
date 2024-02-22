@@ -21,8 +21,14 @@ public class OneToOneMappingApplication {
 //			saveInstrucor(instructorDAO);
 //			getById(instructorDAO);
 //			deleteById(instructorDAO);
-			findInstructorDetail(instructorDAO);
+//			findInstructorDetail(instructorDAO);
+			deleteDetailById(instructorDAO);
 		};
+	}
+
+	private void deleteDetailById(InstructorDAO instructorDAO) {
+		int id = 1;
+		instructorDAO.deleteInstructorMethodById(id);
 	}
 
 	private void findInstructorDetail(InstructorDAO instructorDAO) {
