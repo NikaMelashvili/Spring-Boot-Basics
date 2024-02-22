@@ -20,8 +20,16 @@ public class OneToOneMappingApplication {
 		return runner -> {
 //			saveInstrucor(instructorDAO);
 //			getById(instructorDAO);
-			deleteById(instructorDAO);
+//			deleteById(instructorDAO);
+			findInstructorDetail(instructorDAO);
 		};
+	}
+
+	private void findInstructorDetail(InstructorDAO instructorDAO) {
+		int id = 1;
+		InstructorDetail instructorDetail = instructorDAO.findInstructorDetailById(id);
+		System.out.println("The Instructor detail: " + instructorDetail);
+		System.out.println("The associated instructor: " + instructorDetail.getInstructor());
 	}
 
 	private void deleteById(InstructorDAO instructorDAO) {

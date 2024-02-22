@@ -1,6 +1,7 @@
 package crud.melashvili.onetoonemapping.dao;
 
 import crud.melashvili.onetoonemapping.entity.Instructor;
+import crud.melashvili.onetoonemapping.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,5 +31,10 @@ public class InstructorDAOImpl implements InstructorDAO{
     public void deleteInstructorById(int id) {
         Instructor tempInstructor = manager.find(Instructor.class, id);
         manager.remove(tempInstructor);
+    }
+
+    @Override
+    public InstructorDetail findInstructorDetailById(int id) {
+        return manager.find(InstructorDetail.class, id);
     }
 }
