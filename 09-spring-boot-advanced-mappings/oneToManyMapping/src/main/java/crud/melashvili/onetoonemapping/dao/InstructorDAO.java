@@ -18,4 +18,8 @@ public interface InstructorDAO {
     void deleteInstructorMethodById(int id);
 
     List<Course> findCoursesByInstructorId(int id);
+
+    Instructor findInstructorByIdJoinFetch(int id);
+
+    void updateInstructor(Instructor temp);
 }

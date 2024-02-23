@@ -28,8 +28,27 @@ public class OneToOneMappingApplication {
 //			deleteDetailById(instructorDAO);
 //			createInstructorWithCourses(instructorDAO);
 //			findInstructorWithCourses(instructorDAO);
-			findCoursesForInstructors(instructorDAO);
+//			findCoursesForInstructors(instructorDAO);
+//			findInstructorWithCoursesJoinFetch(instructorDAO);
+			updateInstructor(instructorDAO);
 		};
+	}
+
+	private void updateInstructor(InstructorDAO instructorDAO) {
+		int id = 1;
+		Instructor temp = instructorDAO.findInstructorById(id);
+		temp.setFirstName("Veronica");
+		instructorDAO.updateInstructor(temp);
+		Instructor instructor = instructorDAO.findInstructorById(id);
+		System.out.println(instructor);
+	}
+
+	private void findInstructorWithCoursesJoinFetch(InstructorDAO instructorDAO) {
+		int id = 2;
+		System.out.println("Finding Instructor...");
+		Instructor instructor = instructorDAO.findInstructorByIdJoinFetch(id);
+		System.out.println("tempInstructor: " + instructor);
+		System.out.println("Instructor Courses: " + instructor.getCourses());
 	}
 
 	private void findCoursesForInstructors(InstructorDAO instructorDAO) {

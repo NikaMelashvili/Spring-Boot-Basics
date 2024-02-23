@@ -59,4 +59,22 @@ public class InstructorDAOImpl implements InstructorDAO{
         List<Course> temp = query.getResultList();
         return temp;
     }
+
+    @Override
+    public Instructor findInstructorByIdJoinFetch(int id) {
+        TypedQuery<Instructor> query = manager.createQuery(
+                "select i from Instructor i " +
+                        "JOIN fetch i.courses " +
+                        "where i.id = :data", Instructor.class);
+        query.setParameter("data", id);
+        System.out.println(query);
+        Instructor instructor = query.getSingleResult();
+        return instructor;
+    }
+
+    @Override
+    @Transactional
+    public void updateInstructor(Instructor temp) {
+        manager.merge(temp);
+    }
 }
