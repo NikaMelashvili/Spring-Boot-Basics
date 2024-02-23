@@ -3,6 +3,7 @@ package crud.melashvili.onetoonemapping.dao;
 import crud.melashvili.onetoonemapping.entity.Course;
 import crud.melashvili.onetoonemapping.entity.Instructor;
 import crud.melashvili.onetoonemapping.entity.InstructorDetail;
+import crud.melashvili.onetoonemapping.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
@@ -115,5 +116,42 @@ public class InstructorDAOImpl implements InstructorDAO{
         query.setParameter("data", id);
         Course course = query.getSingleResult();
         return course;
+    }
+
+    @Override
+    public Course findCourseAndStudentsByCourseId(int id) {
+        TypedQuery<Course> query = manager.createQuery(
+                "select c from Course c "
+                        + "JOIN FETCH c.students "
+                        + "WHERE c.id = :data", Course.class
+        );
+        query.setParameter("data", id);
+        Course course = query.getSingleResult();
+        return course;
+    }
+
+    @Override
+    public Student findCourseAndStudentByStudentId(int id) {
+        TypedQuery<Student> query = manager.createQuery(
+                "select s from Student s "
+                        + "JOIN FETCH s.courses "
+                        + "WHERE s.id = :data", Student.class
+        );
+        query.setParameter("data", id);
+        Student student = query.getSingleResult();
+        return student;
+    }
+
+    @Override
+    @Transactional
+    public void update(Student student) {
+        manager.merge(student);
+    }
+
+    @Override
+    @Transactional
+    public void deleteStudentById(int id) {
+        Student student = manager.find(Student.class, id);
+        manager.remove(student);
     }
 }

@@ -1,10 +1,7 @@
 package crud.melashvili.onetoonemapping;
 
 import crud.melashvili.onetoonemapping.dao.InstructorDAO;
-import crud.melashvili.onetoonemapping.entity.Course;
-import crud.melashvili.onetoonemapping.entity.Instructor;
-import crud.melashvili.onetoonemapping.entity.InstructorDetail;
-import crud.melashvili.onetoonemapping.entity.Review;
+import crud.melashvili.onetoonemapping.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,8 +19,61 @@ public class OneToOneMappingApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(InstructorDAO instructorDAO) {
 		return runner -> {
-
+//			createcourseAndStudents(instructorDAO);
+//			displayCourseAndStudentsByCourseId(instructorDAO);
+//			displayCourseAndStudentsByStudentId(instructorDAO);
+//			addMoreCoursesForStudent(instructorDAO);
+//			deleteCourse(instructorDAO);
+			deleteStudent(instructorDAO);
 		};
+	}
+
+	private void deleteStudent(InstructorDAO instructorDAO) {
+		int id = 1;
+		instructorDAO.deleteStudentById(id);
+	}
+
+	private void addMoreCoursesForStudent(InstructorDAO instructorDAO) {
+		int id = 2;
+		Student student = instructorDAO.findCourseAndStudentByStudentId(id);
+		Course course = new Course("Spring Boot in 2 weeks");
+		student.addCourse(course);
+		System.out.println(student.getCourses());
+		instructorDAO.update(student);
+	}
+
+	private void displayCourseAndStudentsByStudentId(InstructorDAO instructorDAO) {
+		int id = 1;
+		Student student = instructorDAO.findCourseAndStudentByStudentId(id);
+		System.out.println(student);
+		System.out.println(student.getCourses());
+	}
+
+	private void displayCourseAndStudentsByCourseId(InstructorDAO instructorDAO) {
+		int id = 10;
+		Course course = instructorDAO.findCourseAndStudentsByCourseId(id);
+		System.out.println(course);
+		System.out.println(course.getStudents());
+	}
+
+	private void createcourseAndStudents(InstructorDAO instructorDAO) {
+		// course
+		Course course = new Course("Horseman ship");
+
+		// students
+		Student student = new Student("Davit", "Kakhadze", "davita@gmail.com");
+		Student student1 = new Student("Luka", "Axvlediani", "axvleda@gmail.com");
+		Student student2 = new Student("Levan", "Khutashvili", "levana@gmail.com");
+
+		// add students to the course
+		course.addStudents(student);
+		course.addStudents(student1);
+		course.addStudents(student2);
+		// save the course and associated student
+
+		instructorDAO.save(course);
+		System.out.println(course);
+		System.out.println(course.getStudents());
 	}
 
 	private void deteleCourseAndReviews(InstructorDAO instructorDAO) {

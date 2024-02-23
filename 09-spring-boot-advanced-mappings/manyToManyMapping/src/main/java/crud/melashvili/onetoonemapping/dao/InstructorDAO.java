@@ -3,6 +3,7 @@ package crud.melashvili.onetoonemapping.dao;
 import crud.melashvili.onetoonemapping.entity.Course;
 import crud.melashvili.onetoonemapping.entity.Instructor;
 import crud.melashvili.onetoonemapping.entity.InstructorDetail;
+import crud.melashvili.onetoonemapping.entity.Student;
 
 import java.util.List;
 
@@ -32,4 +33,12 @@ public interface InstructorDAO {
     void save(Course course);
 
     Course findCourseAndReviewByCourseId(int id);
+
+    Course findCourseAndStudentsByCourseId(int id);
+
+    Student findCourseAndStudentByStudentId(int id);
+
+    void update(Student student);
+
+    void deleteStudentById(int id);
 }
