@@ -21,5 +21,15 @@ public interface InstructorDAO {
 
     Instructor findInstructorByIdJoinFetch(int id);
 
-    void updateInstructor(Instructor temp);
+    void update(Instructor temp);
+
+    void update(Course course);
+
+    Course findById(int id);
+
+    void deleteCourseById(int id);
+
+    void save(Course course);
+
+    Course findCourseAndReviewByCourseId(int id);
 }

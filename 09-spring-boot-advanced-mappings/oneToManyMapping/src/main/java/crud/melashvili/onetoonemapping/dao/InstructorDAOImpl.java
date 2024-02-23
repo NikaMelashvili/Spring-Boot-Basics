@@ -45,8 +45,11 @@ public class InstructorDAOImpl implements InstructorDAO{
     @Override
     @Transactional
     public void deleteInstructorMethodById(int id) {
-        InstructorDetail temp = manager.find(InstructorDetail.class, id);
-        temp.getInstructor().setInstructorDetail(null);
+        Instructor temp = manager.find(Instructor.class, id);
+        List<Course> courses = temp.getCourses();
+        for(Course tempCourse : courses){
+            tempCourse.setInstructor(null);
+        }
         manager.remove(temp);
     }
 
@@ -74,7 +77,43 @@ public class InstructorDAOImpl implements InstructorDAO{
 
     @Override
     @Transactional
-    public void updateInstructor(Instructor temp) {
+    public void update(Instructor temp) {
         manager.merge(temp);
+    }
+
+    @Override
+    @Transactional
+    public void update(Course course) {
+        manager.merge(course);
+    }
+
+    @Override
+    public Course findById(int id) {
+        return manager.find(Course.class, id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCourseById(int id) {
+        Course course = manager.find(Course.class, id);
+        manager.remove(course);
+    }
+
+    @Override
+    @Transactional
+    public void save(Course course) {
+        manager.persist(course);
+    }
+
+    @Override
+    public Course findCourseAndReviewByCourseId(int id) {
+        TypedQuery<Course> query = manager.createQuery(
+                "select c from Course c "
+                + "JOIN FETCH c.reviews "
+                + "WHERE c.id = :data", Course.class
+        );
+        query.setParameter("data", id);
+        Course course = query.getSingleResult();
+        return course;
     }
 }

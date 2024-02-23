@@ -4,6 +4,7 @@ import crud.melashvili.onetoonemapping.dao.InstructorDAO;
 import crud.melashvili.onetoonemapping.entity.Course;
 import crud.melashvili.onetoonemapping.entity.Instructor;
 import crud.melashvili.onetoonemapping.entity.InstructorDetail;
+import crud.melashvili.onetoonemapping.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,24 +22,53 @@ public class OneToOneMappingApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(InstructorDAO instructorDAO) {
 		return runner -> {
-//			saveInstrucor(instructorDAO);
-//			getById(instructorDAO);
-//			deleteById(instructorDAO);
-//			findInstructorDetail(instructorDAO);
-//			deleteDetailById(instructorDAO);
-//			createInstructorWithCourses(instructorDAO);
-//			findInstructorWithCourses(instructorDAO);
-//			findCoursesForInstructors(instructorDAO);
-//			findInstructorWithCoursesJoinFetch(instructorDAO);
-			updateInstructor(instructorDAO);
+//			createCourseAndReviews(instructorDAO);
+//			retriveCourseAndReviews(instructorDAO);
+			deteleCourseAndReviews(instructorDAO);
 		};
 	}
+
+	private void deteleCourseAndReviews(InstructorDAO instructorDAO) {
+		int id = 10;
+		instructorDAO.deleteCourseById(id);
+	}
+
+	private void retriveCourseAndReviews(InstructorDAO instructorDAO) {
+		int id = 10;
+		Course course = instructorDAO.findCourseAndReviewByCourseId(id);
+		System.out.println(course);
+		System.out.println(course.getReviews());
+	}
+
+	private void createCourseAndReviews(InstructorDAO instructorDAO) {
+		Course course = new Course("Cleaning toilets masterclass");
+		course.addReviews(new Review("Amazing now i can clean toilets well."));
+		course.addReviews(new Review("I loved it amazinggg!"));
+		course.addReviews(new Review("How do i get the plunger to work?"));
+		System.out.println(course);
+		System.out.println(course.getReviews());
+		instructorDAO.save(course);
+	}
+
+	private void deleteCourse(InstructorDAO instructorDAO) {
+		int id = 10;
+		instructorDAO.deleteCourseById(id);
+		System.out.println("Course with id - " + id + " deleted.");
+	}
+
+	private void updateCourse(InstructorDAO instructorDAO) {
+		int id = 10;
+		Course temp = instructorDAO.findById(id);
+		temp.setTitle("Horseman ship");
+		instructorDAO.update(temp);
+		System.out.println(temp);
+;	}
 
 	private void updateInstructor(InstructorDAO instructorDAO) {
 		int id = 1;
 		Instructor temp = instructorDAO.findInstructorById(id);
 		temp.setFirstName("Veronica");
-		instructorDAO.updateInstructor(temp);
+		instructorDAO.update(temp);
 		Instructor instructor = instructorDAO.findInstructorById(id);
 		System.out.println(instructor);
 	}
@@ -97,7 +127,7 @@ public class OneToOneMappingApplication {
 	}
 
 	private void deleteDetailById(InstructorDAO instructorDAO) {
-		int id = 3;
+		int id = 2;
 		instructorDAO.deleteInstructorMethodById(id);
 	}
 
