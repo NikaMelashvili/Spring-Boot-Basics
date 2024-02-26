@@ -15,10 +15,6 @@ public class Address {
     @Column(name = "address")
     private String address;
 
-    @ManyToOne
-//    @JoinColumn(name = "student_id", referencedColumnName = "id")
-    private Student student;
-
     public Address(String address) {
         this.address = address;
     }

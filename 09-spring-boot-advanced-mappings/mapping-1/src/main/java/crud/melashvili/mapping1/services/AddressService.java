@@ -12,10 +12,6 @@ public class AddressService {
 
     private AddressDAO addressDAO;
 
-    public AddressService(){
-
-    }
-
     public AddressService(AddressDAO addressDAO) {
         this.addressDAO = addressDAO;
     }

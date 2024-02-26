@@ -24,15 +24,25 @@ public class Mapping1Application {
 	@Bean
 	CommandLineRunner commandLineRunner(AddressService addressService, StudentService studentService){
 		return runner -> {
-			addFullSet(addressService, studentService);
+//			addFullSet(addressService, studentService);
+//			deleteStudentAndAddress(addressService, studentService);
+			deleteAddress(addressService);
 		};
+	}
+
+	private void deleteAddress(AddressService addressService) {
+		addressService.deleteAddressById(1);
+	}
+
+	private void deleteStudentAndAddress(AddressService addressService, StudentService studentService) {
+		int id = 15;
+		studentService.deleteStudent(id);
 	}
 
 	private void addFullSet(AddressService addressService, StudentService studentService) {
 		Student student = new Student("Nika");
-		Address address = new Address("Chavchavadzis 9");
-		student.addAddress(address);
+		Address address = new Address("Chavchavadzis 75");
+		student.setAddresses(address);
 		studentService.addStudent(student);
-//		addressService.addAddress(address);
 	}
 }
