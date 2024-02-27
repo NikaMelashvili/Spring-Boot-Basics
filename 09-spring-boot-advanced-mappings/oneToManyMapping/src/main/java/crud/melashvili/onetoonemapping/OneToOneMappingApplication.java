@@ -22,9 +22,10 @@ public class OneToOneMappingApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(InstructorDAO instructorDAO) {
 		return runner -> {
+			saveInstrucor(instructorDAO);
 //			createCourseAndReviews(instructorDAO);
 //			retriveCourseAndReviews(instructorDAO);
-			deteleCourseAndReviews(instructorDAO);
+//			deteleCourseAndReviews(instructorDAO);
 		};
 	}
 
