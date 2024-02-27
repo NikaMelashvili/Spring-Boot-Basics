@@ -29,6 +29,7 @@ public class AopBeforeAdviceApplication {
 	}
 
 	private void demoTheBeforeAdvice(AccountDAO accountDAO) {
-		accountDAO.addAccount();
+		Account account = new Account();
+		accountDAO.addAccount(account);
 	}
 }
