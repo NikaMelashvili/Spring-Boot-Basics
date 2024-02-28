@@ -19,17 +19,27 @@ public class AopBeforeAdviceApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO){
 		return runner -> {
-			demoTheBeforeAdvice(accountDAO);
-			demoTheBeforeAdviceMembership(membershipDAO);
+
 		};
 	}
 
-	private void demoTheBeforeAdviceMembership(MembershipDAO membershipDAO) {
-		membershipDAO.addAccount();
-	}
+	private void demoTheBeforeAdvice(AccountDAO theAccountDAO, MembershipDAO theMembershipDAO) {
 
-	private void demoTheBeforeAdvice(AccountDAO accountDAO) {
-		Account account = new Account();
-		accountDAO.addAccount(account);
+		// call the business method
+		Account myAccount = new Account();
+		theAccountDAO.addAccount(myAccount, true);
+		theAccountDAO.doWork();
+
+		// call the accountdao getter/setter methods
+		theAccountDAO.setName("foobar");
+		theAccountDAO.setServiceCode("silver");
+
+		String name = theAccountDAO.getName();
+		String code = theAccountDAO.getServiceCode();
+
+		// call the membership business method
+		theMembershipDAO.addSillyMember();
+		theMembershipDAO.goToSleep();
+
 	}
 }
