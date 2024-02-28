@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@Order(2)
+@Order(3)
 public class ApiAnalyiticsAspect {
     @Before("aop.melashvili.aopdemo.aspect.AopExpressions.forDaoPackageNoGetterSetter()")
-    public void beforeAddAccountAdvice() {
-        System.out.println("\n=====>>> Executing @Before advice on method");
+    public void performApiAnalytics() {
+        System.out.println("\n=====>>> Performing API analytics");
     }
 }

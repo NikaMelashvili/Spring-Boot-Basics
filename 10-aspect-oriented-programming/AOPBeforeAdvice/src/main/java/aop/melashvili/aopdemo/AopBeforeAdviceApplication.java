@@ -19,7 +19,7 @@ public class AopBeforeAdviceApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO){
 		return runner -> {
-
+			demoTheBeforeAdvice(accountDAO, membershipDAO);
 		};
 	}
 
@@ -27,6 +27,8 @@ public class AopBeforeAdviceApplication {
 
 		// call the business method
 		Account myAccount = new Account();
+		myAccount.setName("Nika");
+		myAccount.setLevel("Gold");
 		theAccountDAO.addAccount(myAccount, true);
 		theAccountDAO.doWork();
 

@@ -3,8 +3,8 @@ package aop.melashvili.aopdemo;
 public class Account {
 
     private String name;
-
     private String level;
+
 
     public String getName() {
         return name;

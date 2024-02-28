@@ -8,15 +8,15 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class AopExpressions {
 
-    @Pointcut("execution(* aop.melashvili.aopdemo.aspect.*.*(..))")
+    @Pointcut("execution(* aop.melashvili.aopdemo.dao.*.*(..))")
     public void forDaoPackage() {}
 
     // create a pointcut for getter methods
-    @Pointcut("execution(* aop.melashvili.aopdemo.aspect.*.get*(..))")
+    @Pointcut("execution(* aop.melashvili.aopdemo.dao.*.get*(..))")
     public void getter() {}
 
     // create a pointcut for setter methods
-    @Pointcut("execution(* aop.melashvili.aopdemo.aspect.*.set*(..))")
+    @Pointcut("execution(* aop.melashvili.aopdemo.dao.*.set*(..))")
     public void setter() {}
 
     // create pointcut: include package ... exclude getter/setter
