@@ -1,9 +1,6 @@
-package com.melashvili.fileuploadermysql;
+package old;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +24,7 @@ public class ImageData {
     @Column(name = "file_type")
     private String FileType;
 
+    @Lob
     @Column(name = "file")
     private byte[] file;
 }

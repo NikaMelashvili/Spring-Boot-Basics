@@ -10,27 +10,21 @@ import java.util.Optional;
 @Service
 public class ImageService {
 
-    private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
 
     @Autowired
-    public void setImageRepository(ImageRepository imageRepository) {
+    public ImageService(ImageRepository imageRepository) {
         this.imageRepository = imageRepository;
     }
 
-    public String uploadImage(MultipartFile file) throws IOException {
-        imageRepository.save(ImageData.builder()
-                .FileName(file.getName())
-                .FileType(file.getContentType())
-                .file(ImageCompressor.compressImage(file.getBytes())).build());
-        if (file != null && !file.isEmpty()) {
-            return "Image uploaded successfully";
-        }
-        return "Image upload failed";
+    public Image saveImage(MultipartFile file) throws IOException {
+        Image image = new Image();
+        image.setName(file.getOriginalFilename());
+        image.setData(file.getBytes());
+        return imageRepository.save(image);
     }
 
-    public byte[] downloadImage(String imageName) throws IOException {
-        Optional<ImageData> imageData = imageRepository.findByFileName(imageName);
-        byte[] image = ImageCompressor.decompressImage(imageData.get().getFile());
-        return image;
+    public Optional<Image> getImage(Long id) {
+        return imageRepository.findById(id);
     }
 }

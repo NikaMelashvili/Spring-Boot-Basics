@@ -1,4 +1,4 @@
-package com.melashvili.fileuploadermysql;
+package old;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
