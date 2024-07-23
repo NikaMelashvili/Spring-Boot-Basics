@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { FormComponent } from './components/form/form.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormComponent],
-  templateUrl: './app.component.html',
+  imports: [FormComponent],
+  // templateUrl: './app.component.html',
+  template: ` <app-form></app-form> `,
   styleUrl: './app.component.css',
 })
 export class AppComponent {
