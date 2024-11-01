@@ -1,4 +1,4 @@
-package com.melashvili.fileuploadermysql;
+package com.melashvili.fileuploadermysql.uploader;
 
 import jakarta.persistence.*;
 import lombok.Data;
