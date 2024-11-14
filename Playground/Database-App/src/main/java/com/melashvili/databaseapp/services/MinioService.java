@@ -25,16 +25,13 @@ public class MinioService {
 
     public String uploadTextFile(FileUploadRequest fileUploadRequest) {
         try {
-            // Convert the byte array to an InputStream
             InputStream fileInputStream = new ByteArrayInputStream(fileUploadRequest.getFileContent());
 
-            // Use the byte array length as the size
             long fileSize = fileUploadRequest.getFileContent().length;
 
-            // Upload the file to MinIO
             minioClient.putObject(
                     PutObjectArgs.builder()
-                            .bucket(bucketName) // This will be injected properly now
+                            .bucket(bucketName)
                             .object(fileUploadRequest.getFileName())
                             .stream(fileInputStream, fileSize, -1)
                             .contentType("text/plain")
